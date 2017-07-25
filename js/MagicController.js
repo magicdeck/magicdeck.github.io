@@ -27,7 +27,21 @@ class MagicController {
             'HOU', 'AKH'
         ]);
 
-        this.contextManager = new ContextManager({deck: '', sets: 'kld aer'});
+        this.contextManager = new ContextManager({deck: '3 Sacred Cat\
+3 Feral Prowler\
+3 Adorned Pouncer\
+1 Prowling Serpopard\
+3 Pride Sovereign\
+2 Regal Caracal\
+\
+2 Prepare\
+2 Cast Out\
+2 Anointed Procession\
+1 Overcome\
+\
+2 Endless Sands\
+9 Plains\
+7 Forest', sets: 'kld aer'});
         this.contextManager.setRefreshCallback(function(){
            that.doRefresh();
         });
