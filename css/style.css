@@ -1,0 +1,32 @@
+body, html {
+    font-family:        verdana, arial, helvetica, sans-serif;
+    font-size:          90%;
+    margin:             0;
+    padding:            0;
+    height:             100%;
+}
+
+textarea, input, select {
+     display: block;
+   }
+
+div.main {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 5px solid rgba(256, 256, 256, 0.05);
+    background-color: rgba(32, 32, 32, 0.2);
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.cardimg:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
