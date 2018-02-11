@@ -26,7 +26,7 @@ class MagicController {
             // Amonkhet block
             'HOU', 'AKH',
             // Ixalan block,
-            'XLN'
+            'XLN', 'RIX'
         ]);
 
         this.contextManager = new ContextManager({deck: '3 Sacred Cat\n3 Feral Prowler\n3 Adorned Pouncer\n1 Prowling Serpopard\n3 Pride Sovereign\n2 Regal Caracal\n\n2 Prepare\n2 Cast Out\n2 Anointed Procession\n1 Overcome\n\n2 Endless Sands\n9 Plains\n7 Forest', sets: 'kld aer'});
