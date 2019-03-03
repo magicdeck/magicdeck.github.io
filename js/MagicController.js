@@ -21,6 +21,7 @@ class MagicController {
         );
 
         this.oracle = new Oracle([
+            'GRN',
             // Kaladesh block
             'KLD', 'AER',
             // Amonkhet block
