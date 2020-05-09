@@ -3,43 +3,47 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>MagicDeck</title>
+    <title>MTG Deck Viewer</title>
 
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <meta name="author" content="Aleksander Gajewski"/>
 
-    <link rel="icon" type="image/png" href="/img/icon.png"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link rel="icon" type="image/png" href="/static/img/icon.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
 
-    <link rel="stylesheet" href="/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/jquery-ui.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/mtg-deck-viewer/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/deps/jquery-ui/jquery-ui.min.css" type="text/css"/>
 
-    <script type="text/javascript" src="/deps/jquery.1.11.1.min.js"></script>
-    <script type="text/javascript" src="/deps/jquery-ui.1.12.0.min.js"></script>
-    <script type="text/javascript" src="/deps/trianglify.min.js"></script>
+    <script type="text/javascript" src="/static/deps/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/static/deps/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/deps/trianglify.min.js"></script>
 
-    <script type="text/javascript" src="/js/oracle/oracle.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/oracle/oracle.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/oracle/fuzzy.js"></script>
 
-    <script type="text/javascript" src="/js/utils/ContextManager.js"></script>
-    <script type="text/javascript" src="/js/utils/DelayAction.js"></script>
-    <script type="text/javascript" src="/js/utils/HTML.js"></script>
-    <script type="text/javascript" src="/js/utils/StdLib.js"></script>
-    <script type="text/javascript" src="/js/utils/String.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/utils/ContextManager.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/utils/DelayAction.js"></script>
+    <script type="text/javascript" src="/static/deps/HTML.js"></script>
+    <script type="text/javascript" src="/static/js/utils/StdLib.js"></script>
+    <script type="text/javascript" src="/static/js/utils/String.js"></script>
 
-    <script type="text/javascript" src="/js/model/DeckModel.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/model/DeckModel.js"></script>
 
-    <script type="text/javascript" src="/js/control/DeckParser.js"></script>
-    <script type="text/javascript" src="/js/control/StatsBuilder.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/control/DeckParser.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/control/StatsBuilder.js"></script>
 
-    <script type="text/javascript" src="/js/view/CardView.js"></script>
-    <script type="text/javascript" src="/js/view/CardPreview.js"></script>
-    <script type="text/javascript" src="/js/view/ListView.js"></script>
-    <script type="text/javascript" src="/js/view/MainView.js"></script>
-    <script type="text/javascript" src="/js/view/SideView.js"></script>
-    <script type="text/javascript" src="/js/view/StatsView.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/CardView.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/CardPreview.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/ListView.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/MainView.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/SideView.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/view/StatsView.js"></script>
 
-    <script type="text/javascript" src="/js/MagicController.js"></script>
+    <script type="text/javascript" src="/static/mtg-deck-viewer/js/MagicController.js"></script>
+
+    <script src="/static/deps/popper.min.js"></script>
+    <script src="/static/deps/tippy.js"></script>
 
     <script type="text/javascript">
         function bootstrap()
@@ -51,10 +55,10 @@
 </head>
 
 <body onload="bootstrap();">
-<div style="position: absolute; top: 1%; left: 0.5%; width: 76.5%; height: 93%;" id="deckview" class="main"></div>
-<div style="position: absolute; top: 1%; right: 0.5%; width: 22%; height: 11%;" id="context" class="main"></div>
-<div style="position: absolute; top: 13%; right: 0.5%; width: 22%; height: 40%;" id="decklist" class="main"></div>
-<div style="position: absolute; top: 54%; right: 0.5%; width: 22%; height: 45%; text-align: center;" id="cardview" class="main"></div>
-<div style="position: absolute; bottom: 1%; left: 0.5%; width: 76.5%; height: 4%;" id="stats" class="main"></div>
+<div style="position: absolute; top: 1%; left: 0.5%; width: 78.5%; height: 98%;" id="deckview" class="main"></div>
+<div style="position: absolute; top: 1%; right: 0.5%; width: 20%; height: 11%;" id="context" class="main"></div>
+<div style="position: absolute; top: 13%; right: 0.5%; width: 20%; height: 40%; text-align: center; padding-top: 10px;" id="decklist" class="main"></div>
+<div style="position: absolute; top: 54%; right: 0.5%; width: 20%; height: 45%; text-align: center; padding: 10px 0;" id="cardview" class="main"></div>
+<div style="position: absolute; bottom: 2%; right: 21.5%; width: 150px;" id="stats" class="stats"></div>
 </body>
 </html>
