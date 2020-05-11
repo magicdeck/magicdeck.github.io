@@ -11,7 +11,7 @@ function callbackHoverOn(that)
         that.css('z-index', 666);
         that.on('click', function () {
             that.css('transform', 'rotate(0deg) scale(1)');
-            that.css('z-index', that.getAttribute('z-index'));
+            that.css('z-index', that.attr('z-index'));
         });
     };
 }
@@ -20,7 +20,7 @@ function callbackHoverOff(that)
 {
     return function() {
         that.css('transform', 'rotate(0deg) scale(1)');
-        that.css('z-index', that.getAttribute('z-index'));
+        that.css('z-index', that.attr('z-index'));
     };
 }
 
