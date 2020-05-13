@@ -35,7 +35,7 @@ function do_fuzzy_lookup(seed) {
     return key_value[big_key.substr(begin, end - begin)];
 }
 
-function lookup(seed, hint) {
+function lookup(seed, hint, shift=0) {
 console.log(seed);
     seed = seed.toLowerCase();
     hint = hint.toLowerCase();
@@ -48,7 +48,10 @@ console.log(seed);
        return null;
     }
     if (!(hint in sub_dict)) {
-        return sub_dict[Object.keys(sub_dict)[0]];
+        let keys = Object.keys(sub_dict).filter(function(e){return e.length > 3;});
+        let keys_loop = keys.length;
+        shift = shift % keys_loop;
+        return sub_dict[keys[shift]];
     } else {
         return sub_dict[hint];
     }
@@ -83,29 +86,32 @@ class Fuzzy
     }
 
     getMid(mid) {
-        return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
+      return 'https://api.scryfall.com/cards/multiverse/' + mid + '?format=image&version=border_crop';
+      //return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
     }
 
     get200(mid) {
-        return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
+      return 'https://api.scryfall.com/cards/multiverse/' + mid + '?format=image&version=border_crop';
+      //return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
     }
 
     get300(mid) {
-        return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
+      return 'https://api.scryfall.com/cards/multiverse/' + mid + '?format=image&version=border_crop';
+      //  return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + mid + '&type=card'
     }
 
     getTokenImageUrl(res, jsonCard) {
       return 'http://mtg-card-viewer.brainfuck.pl/api/v1/get/tok/' + res + '/' + jsonCard['set_id'] + '/' + jsonCard['number'] + '/' + jsonCard['name'];
     }
 
-    getJson(name, hint)
+    getJson(name, hint, shift=0)
     {
-        return lookup(name, hint);
+        return lookup(name, hint, shift);
     }
 
-    getImageUrl(name, hint)
+    getImageUrl(name, hint, shift=0)
     {
-        let json = this.getJson(name, hint);
+        let json = this.getJson(name, hint, shift);
         let url = this.get200(json['multiverseId']);
         return url;
     }

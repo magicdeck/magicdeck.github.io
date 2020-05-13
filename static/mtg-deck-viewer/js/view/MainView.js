@@ -224,6 +224,7 @@ class MainView
             zindex: zindex
         };
 
-        target.appendChild(Card(this.magicController.fuzzy, cardjson, attrs, this.magicController.cardPreview));
+        let cardView = new CardView(this.magicController.fuzzy, cardjson, attrs, this.magicController.cardPreview);
+        target.appendChild(cardView.getDom());
     }
 }

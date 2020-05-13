@@ -45,14 +45,17 @@ class DeckParser {
             let line_split = line.split('#');
             let number_name = line_split[0];
             let hint_dirty = line_split[1];
-          if ((hint_dirty != null) && (index == 0)) default_hint = hint_dirty;
+            if ((hint_dirty != null) && (index == 0)) {
+                default_hint = hint_dirty;
+            }
             if (hint_dirty == null) {
                 hint_dirty = default_hint;
-               }
+            }
             //  if (hint_dirty == null) {
             //      hint_dirty = '';
             //   }
-            let hint = hint_dirty.replace(/\s*/g, '');
+            let hint_upper = hint_dirty.replace(/\s*/g, '');
+            let hint = hint_upper.toLowerCase();
             let quantity = number_name.replace(/[^\d]*/g, '');
             if (quantity == '') {
               quantity = 1;
@@ -61,6 +64,7 @@ class DeckParser {
             }
             let name_dirty = number_name.replace(/\d*/, '');
             let name = name_dirty.replace(/^\s*/g, '').replace(/\s*$/g, '');
+            console.log('using hint ' + hint);
 //            let match = myRegexp.exec(line);
             if(name != '') {//if (match !== null) {
 //                let quantity = match[1];

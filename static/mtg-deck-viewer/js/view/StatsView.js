@@ -21,6 +21,8 @@ class StatsView
 {
     constructor()
     {
+        buildHowToPopup();
+
         this.dom = $$(div(),
           $$(div({class: 'main', style: 'border: 0px solid black; text-align: center; padding: 10px 0;'}),
             $$$(div(), "<b>Color Wheel</b>"),
@@ -34,7 +36,11 @@ class StatsView
             this.landsWheel = div({style: 'text-align: center; margin: auto;'})
           ),
           br(),
-          this.status = div({class: 'main', style: 'border: 0px solid black; text-align: center; padding: 10px 0;'})
+          this.status = div({class: 'main', style: 'border: 0px solid black; text-align: center; padding: 10px 0;'}),
+          br(),
+          this.howto = $$(div({class: 'main', style: 'border: 0px solid black; text-align: center; padding: 10px 0;'}), 
+            buildHowToButton()
+          )
         );
 
       $('#stats').css('z-index', 1000);
@@ -122,6 +128,7 @@ class StatsView
         let stats_template = '<table width="100%">' +
         '<tr><th width="70%">Creatures:</th><td width="30%">{crits}</td></tr>' +
         '<tr><th>Other Spells:</th><td>{noncrits}</td></tr>' +
+        '<tr><th>Non-Lands:</th><td>{nonlands}</td></tr>' +
         '<tr><th>Lands:</th><td>{lands}</td></tr>' +
         '<tr><th>Total:</th><td>{all}</td></tr>' +
         '<tr><th>Sideboard:</th><td>{side}</td></tr>' +
@@ -131,6 +138,7 @@ class StatsView
                 crits: statsModel.creaturesCount,
                 noncrits: statsModel.noncreaturesCount,
                 lands: statsModel.landsCount,
+                nonlands: statsModel.creaturesCount + statsModel.noncreaturesCount,
                 all: this.support_bold(statsModel.cards, [40, 60]),
                 side: this.support_bold(statsModel.sideCount, [10, 15])
             });

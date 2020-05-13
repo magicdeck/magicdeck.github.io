@@ -1,13 +1,19 @@
+var scale = 1.1;
+
+function rescale(that) {
+        if (that.hasClass('split')) {
+            that.css('transform', 'rotate(90deg) scale(' + (scale) + ')');
+        } else if (that.hasClass('aftermath')) {
+            that.css('transform', 'rotate(-90deg) scale(' + (scale) + ')');
+        } else {
+            that.css('transform', 'scale(' + (scale) + ')');
+        }
+}
+
 function callbackHoverOn(that)
 {
     return function() {
-        if (that.hasClass('split')) {
-            that.css('transform', 'rotate(90deg) scale(' + (1.1) + ')');
-        } else if (that.hasClass('aftermath')) {
-            that.css('transform', 'rotate(-90deg) scale(' + (1.1) + ')');
-        } else {
-            that.css('transform', 'scale(' + (1.1) + ')');
-        }
+        rescale(that);
         that.css('z-index', 666);
         that.on('click', function () {
             that.css('transform', 'rotate(0deg) scale(1)');
@@ -26,23 +32,43 @@ function callbackHoverOff(that)
 
 class CardView
 {
-    constructor()
+    constructor(fuzzy, cardjson, attrs, preview)
     {
-        this.dom = img();
+        this.shift = 1;
+        let newattrs = Object.assign(attrs, {class: 'cardimg', src: fuzzy.get200(cardjson.multiverseId)});
+
+        this.cardjson = cardjson;
+        this.cardhtml = img(newattrs);
+        this.name = cardjson.name;
+        let that = this;
+        that.shift = 0;
+        $(this.cardhtml).addClass(this.cardjson.layout);
+        this.cardhtml.setAttribute('z-index', attrs['zindex']);
+        $(this.cardhtml).css('transition-duration', '0.15s');
+        $(this.cardhtml).css('overflow', 'hidden');
+        this.cardhtml.addEventListener('mouseover', function(){ preview.update(cardjson); });
+        this.cardhtml.addEventListener('contextmenu', function(e){
+            e.preventDefault();
+            that.cardjson = fuzzy.getJson(that.name, '', that.shift);
+            that.shift = that.shift + 1;
+            that.cardhtml.src = fuzzy.get200(that.cardjson.multiverseId);
+            preview.update(that.cardjson);
+            return false;
+        });
+        this.cardhtml.addEventListener('wheel', function(event) {
+           event.preventDefault();
+            scale += event.deltaY * -0.05;
+            scale = Math.min(Math.max(1.05, scale), 4);
+            rescale($(that.cardhtml));
+        });
+        $(that.cardhtml).hover(
+            callbackHoverOn($(that.cardhtml)),
+            callbackHoverOff($(that.cardhtml))
+        );
+    }
+
+    getDom() {
+        return this.cardhtml;
     }
 }
 
-
-function Card(oracle, cardjson, attrs, preview)
-{
-    let newattrs = Object.assign(attrs,
-        {class: 'cardimg', src: oracle.getImageUrl(cardjson.name, cardjson.set_code)});
-    let cardhtml = img(newattrs);i
-    cardhtml.setAttribute('z-index', attrs['zindex']);
-    cardhtml.addEventListener('mouseover', function(ev){preview.dom.src = cardhtml.src; });
-    $(cardhtml).hover(
-        callbackHoverOn($(cardhtml)),
-        callbackHoverOff($(cardhtml))
-    );
-    return cardhtml;
-}
