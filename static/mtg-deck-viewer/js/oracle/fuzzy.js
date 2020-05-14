@@ -118,7 +118,7 @@ class Fuzzy
 
     getBackImageUrl()
     {
-        let url = this.get200(0);
+        let url = '/static/img/back.jpg';
         return url;
     }
 }
